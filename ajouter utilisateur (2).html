@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.rtl.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.rtl.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.rtl.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.rtl.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.rtl.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.rtl.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-utilities.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-utilities.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-utilities.rtl.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-utilities.rtl.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <script src="js/jquery.js"></script>
+    <title>AJOUTER UTILISATEUR</title>
+</head>
+<body class="container" background="400082700017_170704.jpg">
+<div><a class="btn  "><B><I><h1  class="btn btn-outline-success" ><B><H1><H2>RAMPLIR LA FORMULAIRE POUR AJOUTER VOTRE UTILUSATEUR</H2></H1></h1></I></B></a></div><br><br><br>
+
+<div class="container">
+        <form name="myForm" action="Ajouter_utilisateur.php" method="POST"  >
+            <div class="form-group">
+                <label for="nom" class="btn btn-outline-success">Nom De L'utilisateur</label>
+                <input type="" id="name" name="nom" class="form-control form-control-sm" placeholder="entrer votre nom..." oninput="checkName()"><br>
+                <span id="nameErrMsg" class="error"></span>
+            <br><br>
+           
+                <label for="eml" class="btn btn-outline-success">Adresse E-mail</label>
+                <input type="email" id="email"  name="eml" class="form-control" placeholder="entrer un emil" oninput="validateForm()"><h6 id="result"></h6>
+            
+            <br><br>
+           
+                <label for="tel" class="btn btn-outline-success">Numéro De Téléphone</label>
+                <input type="" id="tel" name="tel" class="form-control" placeholder="entrer votre numero ..."  oninput="checkTel()"> 
+                <span id="errortel" class="error"></span>
+            <br><br>
+            <button type="submit" class="btn btn-primary mb-2" id="validate" onclick="validateForm(),checkTel(),checkName()"> AJOUTER </button>
+			 <input type="reset" class="btn btn-primary mb-2" id="annul" value="ANNULER">
+			<br>
+               
+    </div>
+	</form>
+   
+    </div>
+    <script>
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      }
+      
+      function validate() {
+        const $result = $("#result");
+        const email = $("#email").val();
+        $result.text("");
+      
+        if (validateEmail(email)) {
+          //$result.text(email + " valide :)");
+          document.getElementById('email').style.color ="green";
+         
+          email.css("color", "green");
+        } else {
+          $result.text("Cette Email n'est pas valider!!");
+          $result.css("color", "red");
+        }
+        return false;
+      }
+      
+     $("#validate").on("click", validate);
+        
+ validateForm = function () {
+    return validate();
+}
+
+function checkName() {
+    var x = document.myForm;
+    var input = x.name.value;
+    var errMsgHolder = document.getElementById('nameErrMsg');
+    if (input.length < 2) {
+        errMsgHolder.innerHTML =
+            'veillez entrer un nom de lettres superieur a 2';
+        return false;
+    } else if (!(/^\S{3,}$/.test(input))) {
+        errMsgHolder.innerHTML =
+            '<font color="red">le nom ne peut pas contenir des espaces</font>';
+        return false
+    }else if(!(/^[a-zA-Z]+$/.test(input)))
+    {
+        errMsgHolder.innerHTML=
+                '<font color="red">seulement les alphabetes autoriser</font>'
+    }
+    else if(!(/^(?:(\w)(?!\1\1))+$/.test(input)))
+    {
+        errMsgHolder.innerHTML=
+                '<font color="red">per 3 alphabets allowed</font>'
+    }
+    else {
+        errMsgHolder.innerHTML = '';
+        return undefined;
+    }}
+    function checkTel(){
+        var tel=document.getElementById('tel').value;
+        errortel=document.getElementById('errortel');
+        if(tel.length<8 || tel.length>8){
+        errortel.innerHTML='<font font-color="red">veillez entrer un numero exactement de nombre des chiffres egal a 8</font>'
+        return false;
+        
+        }
+    else if (!(/^[0-9]/).test(tel)){
+        errortel.innerHTML='<font color="red">saisir des chiffres</font>';
+    }
+    else{
+        tel.style.color="green";
+    }
+    }
+    //$("#validate").on("click", checkTel);
+ 
+
+
+
+      </script>
+</body>
+</html>
